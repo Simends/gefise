@@ -1,0 +1,25 @@
+Arch Linux:
+  priority: 1
+  disk: '/dev/sda'
+  partition: 1
+  loader: '\vmlinux-linux'
+  root: 'PARTUUID=973b-35ga-'
+  initrd:
+    - '\intel-ucode.img'
+    - '\initramfs-linux.img'
+  params:
+    - 'rw'
+    - 'quiet'
+
+Arch Linux Fallback Initramfs:
+  priority: 2
+  disk: '/dev/sda'
+  partition: 1
+  loader: '\vmlinux-linux'
+  root: 'PARTUUID=973b-35ga-'
+  initrd:
+    - '\intel-ucode.img'
+    - '\initramfs-linux.img'
+  params:
+    - 'rw'
+    - 'quiet'
