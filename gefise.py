@@ -4,7 +4,10 @@ import subprocess
 import yaml
 
 def readConf():
-    with open("efi-entries.yml", "r") as stream:
+    conf_path = os.getenv('GEFISE_PATH')
+    if conf_path == None:
+        conf_path = "/etc/boot-entries.yml" 
+    with open(conf_path, "r") as stream:
         try:
             entry_dict = yaml.safe_load(stream)
             return entry_dict
