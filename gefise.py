@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 import os
 import re
 import subprocess
@@ -26,6 +28,7 @@ def addEntries(entries):
     cur_entries_array = cur_entries.stdout.decode().split('\n')
     added_entries = [None] * len(entries.items())
     for label, entry in entries.items():
+        print('Generating EFI entry for ' + label)
         pri = entry['priority']
         disk = entry['disk']
         part = entry['partition']
@@ -48,7 +51,6 @@ def addEntries(entries):
         cur_entry_index = fetchEntryIndex(label, cur_entries_array)
         if cur_entry_index != None:
             delete_entry = subprocess.run(['efibootmgr', '--bootnum', cur_entry_index, '--delete-bootnum'], stdout=subprocess.PIPE)
-        print(flags)
         new_entries = subprocess.run(flags, stdout=subprocess.PIPE)
         new_entries_array = new_entries.stdout.decode().split('\n')
         new_entry_index = fetchEntryIndex(label, new_entries_array)
@@ -61,7 +63,7 @@ def addEntries(entries):
 def main():
     entries = readConf()
     priority_array = addEntries(entries)
-    os.system('efibootmgr --bootorder ' + ','.join(priority_array))
+    os.system('efibootmgr -q --bootorder ' + ','.join(priority_array))
 
 if __name__ == "__main__":
     main()
