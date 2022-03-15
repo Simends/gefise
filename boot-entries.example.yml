@@ -2,7 +2,7 @@ Arch Linux:
   priority: 1
   disk: '/dev/sda'
   partition: 1
-  loader: '\vmlinux-linux'
+  loader: '\vmlinuz-linux'
   root: 'LABEL=ROOT'
   initrd:
     - '\intel-ucode.img'
@@ -15,7 +15,7 @@ Arch Linux fallback initramfs:
   priority: 2
   disk: '/dev/sda'
   partition: 1
-  loader: '\vmlinux-linux'
+  loader: '\vmlinuz-linux'
   root: 'LABEL=ROOT'
   initrd:
     - '\intel-ucode.img'
